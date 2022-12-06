@@ -11,13 +11,18 @@ using WebAPI.Repository;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http;
+using EFCoreSecondLevelCacheInterceptor;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly string _contentRootPath;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _contentRootPath = env.ContentRootPath;
             Configuration = configuration;
         }
 
@@ -26,6 +31,17 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //---EFCoreSecondLevelCacheInterceptor begin---
+            services.AddEFSecondLevelCache(options =>
+                options.UseMemoryCacheProvider().DisableLogging(true).UseCacheKeyPrefix("EF_")
+                       .CacheAllQueries(CacheExpirationMode.Absolute, TimeSpan.FromMinutes(30))
+
+            // Please use the `CacheManager.Core` or `EasyCaching.Redis` for the Redis cache provider.
+            );
+
+            var connectionString = Configuration["ConnectionStrings:EmployeeAppCon"];
+            services.AddConfiguredMsSqlDbContext(connectionString);
+            //---EFCoreSecondLevelCacheInterceptor end---
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();

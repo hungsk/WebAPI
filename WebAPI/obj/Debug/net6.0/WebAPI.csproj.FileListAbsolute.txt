@@ -95,3 +95,7 @@ E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\System.Memory.Data.dll
 E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\System.Text.Json.dll
 E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\CacheManager.Core.dll
+E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\EasyCaching.Core.dll
+E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\EFCoreSecondLevelCacheInterceptor.dll
+E:\Projects\Core\WebAPI\WebAPI\bin\Debug\net6.0\AsyncLock.dll
