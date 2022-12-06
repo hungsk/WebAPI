@@ -1,8 +1,9 @@
 # WebAPI
 .NetCore WebAPI and EFCore Sample
 
-* Test：//http://localhost:50306/swagger/index.html
+## Test Api
+- http://localhost/swagger/index.html
 
-* ef core:
- >dotnet ef migrations add init --context APIDbContext
- >dotnet ef database update --context APIDbContext
+## Ef Core
+- dotnet ef migrations add init --context APIDbContext
+- dotnet ef database update --context APIDbContext
