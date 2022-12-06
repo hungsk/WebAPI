@@ -34,7 +34,11 @@ namespace WebAPI
             //---EFCoreSecondLevelCacheInterceptor begin---
             services.AddEFSecondLevelCache(options =>
                 options.UseMemoryCacheProvider().DisableLogging(true).UseCacheKeyPrefix("EF_")
-                       .CacheAllQueries(CacheExpirationMode.Absolute, TimeSpan.FromMinutes(30))
+                       //.CacheAllQueries(CacheExpirationMode.Absolute, TimeSpan.FromMinutes(30))  //緩存所有Table
+                       .CacheQueriesContainingTableNames(
+                             CacheExpirationMode.Absolute, TimeSpan.FromMinutes(30), TableNameComparison.ContainsOnly,
+                                "Department", "TableName1", "TableName2"  //緩存指定Table
+                            )
 
             // Please use the `CacheManager.Core` or `EasyCaching.Redis` for the Redis cache provider.
             );
