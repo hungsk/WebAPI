@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EFCoreSecondLevelCacheInterceptor;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using WebAPI.Models;
@@ -12,10 +14,21 @@ namespace WebAPI.Controllers
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentRepository _department;
+        private readonly IEFCacheServiceProvider _cacheServiceProvider;
 
-        public DepartmentController(IDepartmentRepository department)
+        public DepartmentController(IDepartmentRepository department, IEFCacheServiceProvider cacheServiceProvider)
         {
             _department = department ?? throw new ArgumentNullException(nameof(department));
+            _cacheServiceProvider = cacheServiceProvider;
+        }
+
+        [HttpGet]
+        [Route("ClearAllCache")]
+        public JsonResult ClearAllCache()
+        {
+            _cacheServiceProvider.ClearAllCachedEntries();
+
+            return new JsonResult("Clear All Cache Successfully");
         }
 
         [HttpGet]
