@@ -1,5 +1,5 @@
 # WebAPI
-.NetCore WebAPI and EFCore Sample
+.NetCore WebAPI and EFCore and EFCoreSecondLevelCache Sample 
 
 ## Test Api
 - http://localhost/swagger/index.html
