@@ -45,11 +45,12 @@ namespace WebAPI
             });
 
             //Enable CORS
-            services.AddCors(c =>
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod()
-                 .AllowAnyHeader());
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             //JSON Serializer
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
